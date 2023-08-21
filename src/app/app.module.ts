@@ -23,8 +23,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppRoutingModule,
     MsAdalAngular6Module.forRoot({
       tenant: '4072b378-679d-4c55-91d7-ba82ed371ebc',
-      clientId: '1212ee28-ea23-4d8c-ad82-e1b47e1a6fdc',
-      redirectUri: 'http://localhost:4200',
+      clientId: 'f75d91b2-fd57-4db4-a5ba-a443e499ffd5',
+      redirectUri: 'http://localhost:4200/home',
       endpoints: { 
       'api application url': 'api application client id', // this is for feteching the access token
       },
