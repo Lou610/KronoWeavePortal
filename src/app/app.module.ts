@@ -8,13 +8,15 @@ import { UnauthComponent } from './unauth/unauth.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { MsAdalAngular6Module,AuthenticationGuard } from 'microsoft-adal-angular6';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UnauthComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
