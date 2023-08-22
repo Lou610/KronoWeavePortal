@@ -3,14 +3,8 @@ import { ViewChild } from '@angular/core';
 import { MsAdalAngular6Service } from 'microsoft-adal-angular6';
 import { HttpService } from './../http.service';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-function extractUsernameFromEmail(email: string): string | null {
-  const parts = email.split('@');
-  if (parts.length === 2) {
-    return parts[0];
-  }
-  return null;
-}
 
 export interface User {
   EmailAddress: string;
@@ -25,16 +19,17 @@ export interface License {
 }
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class UsersComponent implements OnInit {
   Email: string;
   UserName: any;
   License: any;
   Paid: string;
   Free: string;
+  users: any;
 
   public cellSpacing: number[] = [10, 10];
 
@@ -53,6 +48,8 @@ export class HomeComponent implements OnInit {
       this.GetUserName();
 
       this.GetLicense();
+
+      this.GetUsers();
     } else {
       console.log('User information not available.');
     }
@@ -74,7 +71,6 @@ export class HomeComponent implements OnInit {
         'https://localhost:7151/api/GetLicenseType?Email=' + this.Email
       )
       .subscribe((data) => {
-        console.log('License ' + JSON.stringify(data));
         this.License = data.license1;
       });
   }
@@ -85,6 +81,14 @@ export class HomeComponent implements OnInit {
 
   User() {
     this.router.navigate(['/users']);
+  }
+
+  GetUsers() {
+    this.http
+      .get<User>('https://localhost:7151/api/GetUsers')
+      .subscribe((data) => {
+        this.users = data;
+      });
   }
 
   login(): void {

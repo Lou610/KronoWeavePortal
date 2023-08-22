@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,12 @@ import {
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DesignerComponent } from './designer/designer.component';
+
+
+import { DiagramModule, SnappingService } from '@syncfusion/ej2-angular-diagrams';
+import { UsersComponent } from './users/users.component';
+
 
 @NgModule({
   declarations: [
@@ -22,11 +28,14 @@ import { HttpClientModule } from '@angular/common/http';
     UnauthComponent,
     PagenotfoundComponent,
     SidebarComponent,
+    DesignerComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DiagramModule,
     MsAdalAngular6Module.forRoot({
       tenant: '4072b378-679d-4c55-91d7-ba82ed371ebc',
       clientId: 'f75d91b2-fd57-4db4-a5ba-a443e499ffd5',
@@ -39,8 +48,12 @@ import { HttpClientModule } from '@angular/common/http';
       postLogoutRedirectUri:
         'URI on which you want to redirect user after logout',
     }),
+
   ],
-  providers: [AuthenticationGuard],
+  providers: [AuthenticationGuard,SnappingService],
   bootstrap: [AppComponent],
+  schemas: [
+    NO_ERRORS_SCHEMA
+  ],
 })
 export class AppModule {}
