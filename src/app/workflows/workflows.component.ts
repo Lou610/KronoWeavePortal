@@ -5,7 +5,6 @@ import { HttpService } from './../http.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { initFlowbite } from 'flowbite';
 
 
 export interface User {
@@ -14,16 +13,15 @@ export interface User {
   License: string;
 }
 
-export interface UserList{
+export interface workflows{
 
     id: number,
-    userName: string,
-    userEmailAddress: string,
-    isActive: boolean,
-    license1: string,
-    userId: null
+    workflowName: string,
+    version: number,
+    status: string,
+    lockedBy: string,
+    locked: boolean
 }
-
 
 export interface License {
   Id: string;
@@ -31,18 +29,19 @@ export interface License {
   UserId: string;
 }
 
+
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-workflows',
+  templateUrl: './workflows.component.html',
+  styleUrls: ['./workflows.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class WorkflowsComponent implements OnInit {
   Email: string;
   UserName: any;
   License: any;
   Paid: string;
   Free: string;
-  users: any;
+  workflows: any;
 
   public cellSpacing: number[] = [10, 10];
 
@@ -62,15 +61,13 @@ export class UsersComponent implements OnInit {
 
       this.GetLicense();
 
-      this.GetUsers();
+      this.GetWorkflows();
     } else {
       console.log('User information not available.');
     }
   }
 
-  ngOnInit(): void {
-    initFlowbite();
-  }
+  ngOnInit(): void {}
 
   GetUserName() {
     this.http
@@ -98,12 +95,12 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
-  GetUsers() {
+  GetWorkflows() {
     this.http
-      .get<User>('https://localhost:7151/api/GetUsers')
+      .get<workflows>('https://localhost:7151/api/GetActiveWorkflows')
       .subscribe((data) => {
-        this.users = data;
-        console.log(this.users);
+        this.workflows = data;
+        console.log(this.workflows);
       });
   }
 
@@ -114,4 +111,5 @@ export class UsersComponent implements OnInit {
   logout(): void {
     this.adalService.logout();
   }
+
 }

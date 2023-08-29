@@ -19,6 +19,8 @@ import { DesignerComponent } from './designer/designer.component';
 
 import { DiagramModule, SnappingService } from '@syncfusion/ej2-angular-diagrams';
 import { UsersComponent } from './users/users.component';
+import { WorkflowsComponent } from './workflows/workflows.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { UsersComponent } from './users/users.component';
     SidebarComponent,
     DesignerComponent,
     UsersComponent,
+    WorkflowsComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

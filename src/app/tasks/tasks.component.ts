@@ -3,27 +3,13 @@ import { ViewChild } from '@angular/core';
 import { MsAdalAngular6Service } from 'microsoft-adal-angular6';
 import { HttpService } from './../http.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { initFlowbite } from 'flowbite';
-
 
 export interface User {
   EmailAddress: string;
   userName: string;
   License: string;
 }
-
-export interface UserList{
-
-    id: number,
-    userName: string,
-    userEmailAddress: string,
-    isActive: boolean,
-    license1: string,
-    userId: null
-}
-
 
 export interface License {
   Id: string;
@@ -32,17 +18,16 @@ export interface License {
 }
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-tasks',
+  templateUrl: './tasks.component.html',
+  styleUrls: ['./tasks.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class TasksComponent implements OnInit {
   Email: string;
   UserName: any;
   License: any;
   Paid: string;
   Free: string;
-  users: any;
 
   public cellSpacing: number[] = [10, 10];
 
@@ -61,16 +46,12 @@ export class UsersComponent implements OnInit {
       this.GetUserName();
 
       this.GetLicense();
-
-      this.GetUsers();
     } else {
       console.log('User information not available.');
     }
   }
 
-  ngOnInit(): void {
-    initFlowbite();
-  }
+  ngOnInit(): void {}
 
   GetUserName() {
     this.http
@@ -86,6 +67,7 @@ export class UsersComponent implements OnInit {
         'https://localhost:7151/api/GetLicenseType?Email=' + this.Email
       )
       .subscribe((data) => {
+        console.log('License ' + JSON.stringify(data));
         this.License = data.license1;
       });
   }
@@ -98,14 +80,10 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
-  GetUsers() {
-    this.http
-      .get<User>('https://localhost:7151/api/GetUsers')
-      .subscribe((data) => {
-        this.users = data;
-        console.log(this.users);
-      });
+  Workflows() {
+    this.router.navigate(['/workflows']);
   }
+
 
   login(): void {
     this.adalService.login();

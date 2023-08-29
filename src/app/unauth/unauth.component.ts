@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-unauth',
@@ -10,6 +11,7 @@ export class UnauthComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    initFlowbite();
   }
 
 }

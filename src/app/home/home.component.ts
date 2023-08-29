@@ -87,6 +87,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
+  Tasks() {
+    this.router.navigate(['/tasks']);
+  }
+
+  Workflows() {
+    this.router.navigate(['/workflows']);
+  }
+
+
   login(): void {
     this.adalService.login();
   }
